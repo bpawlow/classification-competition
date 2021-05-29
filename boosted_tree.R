@@ -12,13 +12,12 @@ bt_model <- boost_tree(mode = "classification",
                        min_n = tune(),
                        mtry = tune(),
                        learn_rate = tune()) %>% 
-  set_engine("xgboost", importance = "impurity")
+  set_engine("xgboost")
 
 # set-up tuning grid ----
 
 bt_param <- parameters(bt_model) %>% 
-  update(mtry = mtry(range = c(2, 8)),
-         learn_rate = learn_rate(range = c(-5, -0.2)))
+  update(mtry = mtry(range = c(1, 26)))
 
 bt_param
 

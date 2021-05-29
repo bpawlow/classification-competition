@@ -51,7 +51,7 @@ ggplot(training, aes(x=int_rate, y=hi_int_prncp_pd)) +
 recipe <- recipe(hi_int_prncp_pd ~ .,
                     data = training) %>%
   step_dummy(all_nominal(), -all_outcomes(), one_hot = TRUE) %>% 
-  step_nzv(all_nominal(), -all_outcomes()) %>% 
+  step_zv(all_predictors()) %>% 
   step_normalize(all_predictors(), -all_outcomes())
 
 prep(recipe) %>% 
